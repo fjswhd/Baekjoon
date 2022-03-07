@@ -1,13 +1,39 @@
 package implementation;
 
+import java.util.Arrays;
+
 public class I_4673 {
 	public static void main(String[] args) {
 
-		for (int i = 1; i <= 10000; i++) {
-			if (isSelfNum(i)) System.out.println(i);
+		boolean[] selfNumbers = new boolean[10001];
+		Arrays.fill(selfNumbers, true);
+		
+		for (int i = 0; i < selfNumbers.length; i++) {
+			int n = d(i);
+			if (n <= 10000) selfNumbers[n] = false;
 		}
+		
+		for (int i = 0; i < selfNumbers.length; i++) {
+			if (selfNumbers[i]) System.out.println(i);
+		}
+		
+		
+		
 	}
 	
+	private static int d(int x) {
+		int result = x;
+		
+		while (x != 0) {
+			result += x%10;
+			x /= 10;
+		}
+		
+		return result;
+	}
+	
+	/*
+	 * 이 방식은 범위가 10000을 넘어가면 코드를 전부 수정해야함 > 좋은 방식이 아님
 	private static boolean isSelfNum(int x) {
 		boolean result = true;
 		
@@ -31,4 +57,5 @@ public class I_4673 {
 		
 		return result;
 	}
+	*/
 }
